@@ -1,4 +1,5 @@
 services:
+
   mysql:
     image: mysql:8.0
     environment:
@@ -6,6 +7,7 @@ services:
       MYSQL_DATABASE: url_shortener
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./init-db:/docker-entrypoint-initdb.d
     ports:
       - "3307:3306"
     networks:

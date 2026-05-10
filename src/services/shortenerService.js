@@ -24,7 +24,7 @@ const shortenUrl = async (originalUrl, expiryDays = null) => {
   return {
     originalUrl,
     shortCode,
-    shortUrl: `http://localhost:3000/${shortCode}`,
+    shortUrl: `http://13.218.136.99/${shortCode}`,
     expiresAt: expiresAt || 'Never'
   };
 };
@@ -73,7 +73,7 @@ const getUrlAnalytics = async (shortCode) => {
     clicks: stats.clicks,
     createdAt: stats.created_at,
     expiresAt: stats.expires_at || 'Never',
-    shortUrl: `http://localhost:3000/${stats.short_code}`
+    shortUrl: `http://13.218.136.99/${stats.short_code}`
   };
 };
 

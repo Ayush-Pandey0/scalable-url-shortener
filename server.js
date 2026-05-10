@@ -13,6 +13,7 @@ try {
   connection.release();
 } catch (err) {
   console.error('❌ MySQL connection failed:', err.message);
+  process.exit(1); // Exit so Docker can restart the container
 }
 
 app.listen(PORT, () => {
