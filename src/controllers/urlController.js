@@ -12,8 +12,7 @@ const handleShortenUrl = async (req, res) => {
       });
     }
 
-    const baseUrl = `${req.protocol}://${req.get('host')}`;
-    const result = await shortenUrl(originalUrl, expiryDays, baseUrl);
+    const result = await shortenUrl(originalUrl, expiryDays);
 
     return res.status(201).json({
       success: true,
@@ -49,8 +48,7 @@ const handleRedirect = async (req, res) => {
 const handleGetAnalytics = async (req, res) => {
   try {
     const { code } = req.params;
-    const baseUrl = `${req.protocol}://${req.get('host')}`;
-    const stats = await getUrlAnalytics(code, baseUrl);
+    const stats = await getUrlAnalytics(code);
 
     return res.status(200).json({
       success: true,
