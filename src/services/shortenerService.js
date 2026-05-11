@@ -4,7 +4,7 @@ import redisClient from '../config/redis.js';
 
 const CACHE_EXPIRY = 3600;
 
-const shortenUrl = async (originalUrl, expiryDays = null) => {
+const shortenUrl = async (originalUrl, expiryDays = null, baseUrl) => {
   let shortCode = generateCode();
 
   const existing = await findUrlByCode(shortCode);
@@ -24,7 +24,7 @@ const shortenUrl = async (originalUrl, expiryDays = null) => {
   return {
     originalUrl,
     shortCode,
-    shortUrl: `http://23.22.86.135/${shortCode}`,
+    shortUrl: `${baseUrl}/${shortCode}`,
     expiresAt: expiresAt || 'Never'
   };
 };
@@ -60,7 +60,7 @@ const getOriginalUrl = async (shortCode) => {
   return url;
 };
 
-const getUrlAnalytics = async (shortCode) => {
+const getUrlAnalytics = async (shortCode, baseUrl) => {
   const stats = await getUrlStats(shortCode);
 
   if (!stats) {
@@ -73,7 +73,7 @@ const getUrlAnalytics = async (shortCode) => {
     clicks: stats.clicks,
     createdAt: stats.created_at,
     expiresAt: stats.expires_at || 'Never',
-    shortUrl: `http://23.22.86.135/${stats.short_code}`
+    shortUrl: `${baseUrl}/${stats.short_code}`
   };
 };
 
